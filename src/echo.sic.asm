@@ -2,8 +2,8 @@ cloop	JSUB	rdrec	. rdrec()
 	LDA	LENGTH
 	COMP	#0
 	JEQ	endfil	. if (length == 0) endfil()
-	JSUB	wrrec	. else wrrec()
 	STL	RETADR	.. JSUBEQ가 없어서 이렇게 한건가?
+	JSUB	wrrec	. wrrec()
 	J	cloop	. cloop()
 
 endfil	LDA	EOF
