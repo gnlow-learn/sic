@@ -1,0 +1,9 @@
+main	LDA	NUM1
+	ADD	NUM2
+	STA	RESULT
+
+NUM1	WORD	5
+NUM2	WORD	10
+RESULT	WORD	0
+	END	main
+halt	J	halt
