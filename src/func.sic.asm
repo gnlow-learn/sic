@@ -3,13 +3,21 @@ stack	START	0
 	JSUB	stinit
 	JSUB	stinitr
 
+	. 11 + (22 + 33) = 66
+
 	LDA	#0x11
+	JSUB	push
+
+	LDA	#0x22
 	JSUB	push
 	
 	LDA	#0x33
 	JSUB	push
 	
-	JSUB	pushr	
+	JSUB	pushr
+	JSUB	myadd
+
+	JSUB	pushr
 	JSUB	myadd
 
 halt	J	halt
