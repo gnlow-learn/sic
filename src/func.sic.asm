@@ -1,6 +1,7 @@
 stack	START	0
 	LDA	#myst
 	JSUB	stinit
+	JSUB	stinitr
 
 	LDA	#0x11
 	JSUB	push
@@ -8,8 +9,8 @@ stack	START	0
 	LDA	#0x33
 	JSUB	push
 	
+	JSUB	pushr	
 	JSUB	myadd
-jj	TIO
 
 halt	J	halt
 
@@ -23,7 +24,9 @@ myadd	JSUB	pop
 	LDA	foo
 	ADD	bar
 
-	J	#jj
+	JSUB	push
+
+	JSUB	popr
 
 foo	RESW	1
 bar	RESW	1
@@ -48,7 +51,31 @@ pop	LDA	sp
 sp	RESW	1
 
 ...
+stinitr	LDA	#retadr
+	STA	spr
+	RSUB
 
-myst	RESB	4096
+pushr	STL	@spr
+	LDA	@spr
+	ADD	#3
+	STA	@spr
+
+	LDA	spr
+	ADD	#3
+	STA	spr
+	RSUB
+
+popr	LDA	spr
+	SUB	#3
+	STA	spr
+	LDL	@spr
+	RSUB
+
+spr	RESW	1
+retadr	RESW	100	. return addresses
+
+...
+
+myst	RESW	100
 
 	END	stack
