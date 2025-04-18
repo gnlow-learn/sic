@@ -6,6 +6,13 @@
 . . . . . . Identifier
 . . . . . . Expression
 . . . . . . . String
+. . Statement
+. . . ExpressionStatement
+. . . . Expression
+. . . . . FunctionCall
+. . . . . . Identifier
+. . . . . . Expression
+. . . . . . . String
 
 
 prog	START	0
@@ -18,10 +25,15 @@ prog	START	0
 	JSUB	push
 	JSUB	pushr
 	JSUB	print
+	LDA	#vvb
+	JSUB	push
+	JSUB	pushr
+	JSUB	print
 halt	J	halt
 
 ... table ...
 vva	BYTE	C'Hello, World!;'
+vvb	BYTE	C'Wow!;'
 
 ... stdio ...
 print	JSUB	pop
